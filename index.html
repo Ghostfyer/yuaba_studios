@@ -38,7 +38,6 @@
     }
 
     body {
-      /* Fonte alterada para Montserrat e forçando o Extra Bold (800) */
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       background:
@@ -122,41 +121,13 @@
       min-width: 0;
     }
 
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      position: relative;
-      border: 1px solid rgba(255,255,255,0.09);
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.16), transparent 38%),
-        linear-gradient(135deg, #181818, #111111);
-      box-shadow: inset 0 0 22px rgba(255,255,255,0.04), 0 0 30px rgba(143,121,255,0.12);
-      overflow: hidden;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      background: var(--white);
-      opacity: 0.9;
-    }
-
-    .brand-mark::before {
-      width: 1px;
-      height: 70%;
-      left: 50%;
-      top: 15%;
-      transform: translateX(-50%);
-    }
-
-    .brand-mark::after {
-      height: 1px;
-      width: 70%;
-      left: 15%;
-      top: 50%;
-      transform: translateY(-50%);
+    /* LOGO COM QUADRADO BRANCO LUMINOSO E TEXTO PRETO INTENSO */
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: invert(1) brightness(1.2) contrast(1.25);
+      border-radius: 8px;
     }
 
     .brand-text {
@@ -165,7 +136,6 @@
 
     .brand-text strong {
       display: block;
-      /* Cinzel removido, herda Montserrat */
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-size: 0.95rem;
@@ -298,7 +268,6 @@
     }
 
     h1, h2, h3 {
-      /* Cinzel removido, herda Montserrat e mantido Extra Bold */
       font-weight: 800;
       line-height: 0.95;
     }
@@ -335,7 +304,6 @@
       padding: 0 22px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.09);
-      /* fontWeight já herdado, mas podemos forçar */
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -615,22 +583,6 @@
       border: 0;
     }
 
-    .trailer-fallback {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.45)),
-        radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 18%);
-      pointer-events: none;
-    }
-
     .contact-wrap {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -810,17 +762,15 @@
   <header>
     <div class="container header-inner">
       <a href="#topo" class="brand" aria-label="Yuaba Studios - Início">
-        <div class="brand-mark" aria-hidden="true"></div>
+        <img src="https://i.ibb.co/PsDdL2kX/logoyuabastudios.png" alt="Logo Yuaba Studios" class="brand-logo">
         <div class="brand-text">
           <strong>Yuaba Studios</strong>
-          <span> </span>
         </div>
       </a>
 
       <nav aria-label="Navegação principal">
         <ul>
           <li><a href="#jogo">O Jogo</a></li>
-        
           <li><a href="#trailer">Trailer</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
@@ -834,19 +784,20 @@
 
       <div class="container hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow reveal stagger-1">Novo horror narrativo</div>
+          <div class="eyebrow reveal stagger-1">Nosso novo jogo</div>
 
           <h1 class="reveal stagger-2">Alice: Segredos do Porão</h1>
 
           <p class="reveal stagger-3">
             Após a misteriosa morte de seus pais, Alice retorna à antiga casa da família em Michigan.
-            O que deveria ser apenas uma despedida se transforma em um mergulho sufocante em memórias
-            distorcidas, silêncios impossíveis e algo que parece respirar sob o assoalho.
+            O que deveria ser apenas uma despedida se transforma em um verdadeiro cenário 
+            de horror, onde cada cômodo, até os desconhecidos, parecem esconder uma verdade sufocante.
+
+            
           </p>
 
           <div class="hero-actions reveal stagger-4">
             <a class="btn btn-primary" href="#trailer">Assistir trailer</a>
-            <a class="btn btn-secondary" href="#universo">Explorar o universo</a>
           </div>
         </div>
 
@@ -864,14 +815,10 @@
               <strong>Yuaba Studios</strong>
             </div>
 
-            <div class="meta-item">
-              <small>Atmosfera</small>
-              <strong>Claustrofóbica, íntima e perturbadora</strong>
-            </div>
 
             <div class="meta-item">
               <small>Proposta</small>
-              <strong>Descobrir o que foi enterrado no passado da família</strong>
+              <strong>Descubra o que foi enterrado no passado da família</strong>
             </div>
           </div>
         </aside>
@@ -886,10 +833,8 @@
             <h2>Um retorno que nunca deveria acontecer</h2>
           </div>
           <p class="reveal stagger-2">
-            A proposta desta página segue uma direção sóbria, cinematográfica e opressiva, usando
-            exclusivamente os tons solicitados — <strong style="color:#DFDFDF;">#DFDFDF</strong> e
-            <strong style="color:#DFDFDF;">#0E0E0E</strong> como base — para reforçar a tensão, o vazio
-            e o isolamento da narrativa.
+           Alice retorna às memórias do seu passado e revisita suas lembranças lentamente. Entretanto, 
+            <strong style="color:#DFDFDF;">ela pode sentir que há algo de errado com aquela casa.</strong>
           </p>
         </div>
 
@@ -901,58 +846,43 @@
       <div class="container">
         <div class="story-grid">
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg:
-              linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.45)),
-              radial-gradient(circle at 50% 22%, rgba(223,223,223,0.15), transparent 18%),
-              linear-gradient(180deg, #232323 0%, #1b1b1b 24%, #151515 48%, #101010 100%);">
-              <div class="visual-caption">Imagem panorâmica do porão</div>
+            <div class="story-visual" style="--bg: url('https://i.ibb.co/KjmCHHNT/alice-casa.png');">
+              <div class="visual-caption">meter texto aqui</div>
             </div>
 
             <div class="story-copy">
               <span>Ambiente</span>
-              <h3>O porão observa de volta</h3>
+              <h3>A escuridão observa de volta</h3>
               <p>
-                Os blocos abaixo foram ajustados para um formato mais retangular e amplo, ideal para
-                imagens grandes. Aqui, a arte pode respirar com mais impacto cinematográfico, valorizando
-                composição horizontal, corredores extensos, escadas, sombras e enquadramentos tensos.
+                Uma organização sombria aguarda Alice debaixo de suas memórias. Por trás do semblante de riqueza, aquela casa era lar de diversos cultistas esquecidos pelo tempo, conhecidos como <strong style="color:#DFDFDF;">Os Ceifadores.</strong>
               </p>
             </div>
           </article>
 
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg:
-              linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.42)),
-              radial-gradient(circle at 48% 24%, rgba(223,223,223,0.12), transparent 16%),
-              linear-gradient(135deg, #212121 0%, #171717 40%, #121212 100%);">
-              <div class="visual-caption">Imagem ampla da protagonista</div>
+            <div class="story-visual" style="--bg: url('https://i.ibb.co/3mxCynvB/alice-cave.png');">
+              <div class="visual-caption">meter aqui tambem</div>
             </div>
 
             <div class="story-copy">
-              <span>Protagonista</span>
-              <h3>Alice entre luto e ruína</h3>
+              <span>As passagens</span>
+              <h3>perdi o html daqui pq crashou</h3>
               <p>
-                Alice não enfrenta apenas um espaço físico. Cada cômodo reabre fragmentos da perda,
-                da culpa e de lembranças que parecem ter sido deformadas pelo tempo. A tensão nasce do
-                conflito entre o que ela recorda e o que a casa insiste em mostrar.
+               texto legal pq perdi o codigo.
               </p>
             </div>
           </article>
 
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg:
-              linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.5)),
-              radial-gradient(circle at 50% 18%, rgba(223,223,223,0.12), transparent 14%),
-              linear-gradient(180deg, #252525 0%, #181818 32%, #121212 62%, #0f0f0f 100%);">
-              <div class="visual-caption">Imagem grande do mistério central</div>
+            <div class="story-visual" style="--bg: url('https://i.ibb.co/Vc5n1Bfy/mergulhe-na-escuridao.png');">
+              <div class="visual-caption">oh meu deus quantas metidas</div>
             </div>
 
             <div class="story-copy">
               <span>Mistério</span>
               <h3>Segredos enterrados pedem para emergir</h3>
               <p>
-                O terror psicológico se constrói por camadas: documentos, símbolos, ruídos, silhuetas e
-                a sensação constante de que algo foi escondido por muito tempo. O porão deixa de ser cenário
-                e se torna uma presença ativa dentro da experiência.
+                escrever algo bem legal sobre os ceifadores ou coisas reveladas no trailer
               </p>
             </div>
           </article>
@@ -968,22 +898,18 @@
             <h2>Primeiro vislumbre</h2>
           </div>
           <p class="reveal stagger-2">
-            Substitua o link do vídeo abaixo pelo trailer oficial quando estiver pronto. O layout já está
-            preparado para manter um aspecto elegante, amplo e consistente com a direção sombria do projeto.
+            Confira abaixo o trailer oficial de Alice: Segredos do Porão.
           </p>
         </div>
 
         <div class="trailer-shell reveal stagger-3">
           <div class="trailer-frame">
             <iframe
-              src="https://www.youtube.com/embed/seu_video_aqui"
+              src="https://www.youtube.com/embed/tjOkANUu3cQ"
               title="Trailer oficial de Alice: Segredos do Porão"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
             </iframe>
-            <div class="trailer-fallback">
-              Se ainda não houver trailer publicado, troque o código “seu_video_aqui” pelo ID do vídeo no YouTube.
-            </div>
           </div>
         </div>
       </div>
@@ -996,11 +922,11 @@
             <span class="section-kicker">Contato</span>
             <h3>Fale com a Yuaba Studios</h3>
             <p>
-              Tem dúvidas, quer acompanhar o desenvolvimento ou conversar sobre o projeto?
+              Tem dúvidas, quer nos apoiar diretamente ou conversar sobre o projeto?
               Entre em contato pelo e-mail oficial.
             </p>
-            <a class="contact-link" href="mailto:contato@yuabastudios.com">
-              contato@yuabastudios.com
+            <a class="contact-link" href="mailto:yuabastudioscontato@gmail.com">
+              yuabastudioscontato@gmail.com
             </a>
           </div>
 
