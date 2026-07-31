@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alice: Segredos do Porão - Yuaba Studios</title>
+  <meta name="description" content="Página oficial de Alice: Segredos do Porão, um jogo de terror psicológico da Yuaba Studios." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0E0E0E;
+      --white: #DFDFDF;
+      --muted: #bcbcbc;
+      --line: #242424;
+      --line-soft: #1a1a1a;
+      --accent: #8f79ff;
+      --accent-soft: rgba(143, 121, 255, 0.18);
+      --panel: rgba(18, 18, 18, 0.82);
+      --panel-strong: rgba(14, 14, 14, 0.94);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 18px;
+      --radius-lg: 28px;
+      --max: 1240px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      /* Fonte alterada para Montserrat e forçando o Extra Bold (800) */
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.035), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(143, 121, 255, 0.08), transparent 22%),
+        linear-gradient(180deg, #111111 0%, var(--black) 35%, #0b0b0b 100%);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 100% 3px, 3px 100%;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color .25s ease, opacity .25s ease, transform .25s ease;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin-inline: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 0.06s; }
+    .stagger-2 { transition-delay: 0.14s; }
+    .stagger-3 { transition-delay: 0.22s; }
+    .stagger-4 { transition-delay: 0.3s; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(14,14,14,0.96), rgba(14,14,14,0.72));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.16), transparent 38%),
+        linear-gradient(135deg, #181818, #111111);
+      box-shadow: inset 0 0 22px rgba(255,255,255,0.04), 0 0 30px rgba(143,121,255,0.12);
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--white);
+      opacity: 0.9;
+    }
+
+    .brand-mark::before {
+      width: 1px;
+      height: 70%;
+      left: 50%;
+      top: 15%;
+      transform: translateX(-50%);
+    }
+
+    .brand-mark::after {
+      height: 1px;
+      width: 70%;
+      left: 15%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      /* Cinzel removido, herda Montserrat */
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: var(--white);
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--white);
+      opacity: 0.9;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 1px;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: end;
+      padding: 80px 0 44px;
+      overflow: clip;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(180deg, rgba(14,14,14,0.18) 0%, rgba(14,14,14,0.35) 30%, rgba(14,14,14,0.82) 72%, var(--black) 100%),
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,0.09), transparent 22%),
+        radial-gradient(circle at 52% 28%, rgba(255,255,255,0.05), transparent 12%),
+        linear-gradient(180deg, #181818 0%, #121212 50%, #0E0E0E 100%);
+    }
+
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(223,223,223,0.06), transparent 18%),
+        linear-gradient(90deg, transparent 0%, rgba(223,223,223,0.04) 48%, transparent 52%, transparent 100%);
+      filter: blur(2px);
+      opacity: 0.85;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 10% 12% 0 12%;
+      border-radius: 26px 26px 0 0;
+      border: 1px solid rgba(255,255,255,0.05);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 20%),
+        radial-gradient(circle at 50% 35%, rgba(0,0,0,0.75), transparent 34%),
+        linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.56));
+      box-shadow: inset 0 -120px 120px rgba(0,0,0,0.4);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      opacity: 0.8;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: 0 0 16px rgba(223,223,223,0.45);
+    }
+
+    h1, h2, h3 {
+      /* Cinzel removido, herda Montserrat e mantido Extra Bold */
+      font-weight: 800;
+      line-height: 0.95;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3rem, 8vw, 3.75rem);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      max-width: 10ch;
+      text-wrap: balance;
+      text-shadow: 0 10px 40px rgba(0,0,0,0.45);
+    }
+
+    .hero-copy p {
+      margin-top: 22px;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.09);
+      /* fontWeight já herdado, mas podemos forçar */
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--black);
+      box-shadow: 0 10px 30px rgba(223,223,223,0.12);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.01);
+      background: #ffffff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.02);
+      color: var(--white);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+    }
+
+    .hero-side {
+      justify-self: end;
+      width: min(100%, 380px);
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .side-label {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-item {
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .meta-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .meta-item small {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      margin-bottom: 6px;
+    }
+
+    .meta-item strong {
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .section {
+      padding: 88px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .section-kicker {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.74rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 62ch;
+      justify-self: end;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .story-grid {
+      display: grid;
+      gap: 38px;
+    }
+
+    .story-block {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 26px;
+      align-items: stretch;
+      padding: 18px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 430px;
+    }
+
+    .story-block:nth-child(even) {
+      grid-template-columns: 0.65fr 1.35fr;
+    }
+
+    .story-block:nth-child(even) .story-visual {
+      order: 2;
+    }
+
+    .story-block:nth-child(even) .story-copy {
+      order: 1;
+    }
+
+    .story-visual {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 390px;
+      border: 1px solid rgba(255,255,255,0.05);
+      background-color: #151515;
+      isolation: isolate;
+    }
+
+    .story-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(14,14,14,0.06), rgba(14,14,14,0.52)),
+        var(--bg, linear-gradient(135deg, #222, #111));
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+      transition: transform .8s ease, filter .8s ease;
+      filter: grayscale(0.08) contrast(1.02);
+    }
+
+    .story-block:hover .story-visual::before {
+      transform: scale(1.06);
+      filter: grayscale(0) contrast(1.05);
+    }
+
+    .story-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 18%),
+        linear-gradient(0deg, rgba(0,0,0,0.42), transparent 35%);
+      z-index: 1;
+    }
+
+    .visual-caption {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(14,14,14,0.68);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .visual-caption::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--white);
+      opacity: 0.85;
+    }
+
+    .story-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18px 10px 18px 8px;
+    }
+
+    .story-copy span {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    .story-copy h3 {
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .story-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 42ch;
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      margin: 8px 0 0;
+    }
+
+    .trailer-shell {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      box-shadow: var(--shadow);
+    }
+
+    .trailer-frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 20%),
+        linear-gradient(180deg, #171717, #101010);
+    }
+
+    .trailer-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .trailer-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.45)),
+        radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 18%);
+      pointer-events: none;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .contact-panel,
+    .community-panel {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .contact-panel h3,
+    .community-panel h3 {
+      font-size: clamp(1.5rem, 2vw, 2.2rem);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .contact-panel p,
+    .community-panel p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 22px;
+      max-width: 54ch;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      word-break: break-word;
+    }
+
+    .contact-link:hover {
+      transform: translateX(4px);
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .social-link {
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(255,255,255,0.025);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+      font-weight: 800;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    footer {
+      padding: 34px 0 44px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: #8f8f8f;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-inner,
+      .section-head,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        justify-self: start;
+      }
+
+      .section-head p {
+        justify-self: start;
+      }
+
+      .story-block,
+      .story-block:nth-child(even) {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .story-block:nth-child(even) .story-visual,
+      .story-block:nth-child(even) .story-copy {
+        order: initial;
+      }
+
+      .story-visual {
+        min-height: 360px;
+      }
+
+      .story-copy p {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        min-height: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 64px 0 28px;
+      }
+
+      .hero-copy h1 {
+        max-width: 100%;
+      }
+
+      .hero-copy p {
+        font-size: 0.98rem;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .story-block {
+        padding: 12px;
+        border-radius: 22px;
+      }
+
+      .story-visual {
+        min-height: 280px;
+        border-radius: 16px;
+      }
+
+      .story-copy {
+        padding: 10px 4px 10px;
+      }
+
+      .contact-panel,
+      .community-panel,
+      .hero-side {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#topo" class="brand" aria-label="Yuaba Studios - Início">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <strong>Yuaba Studios</strong>
+          <span> </span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="#jogo">O Jogo</a></li>
+        
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="topo">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow reveal stagger-1">Novo horror narrativo</div>
+
+          <h1 class="reveal stagger-2">Alice: Segredos do Porão</h1>
+
+          <p class="reveal stagger-3">
+            Após a misteriosa morte de seus pais, Alice retorna à antiga casa da família em Michigan.
+            O que deveria ser apenas uma despedida se transforma em um mergulho sufocante em memórias
+            distorcidas, silêncios impossíveis e algo que parece respirar sob o assoalho.
+          </p>
+
+          <div class="hero-actions reveal stagger-4">
+            <a class="btn btn-primary" href="#trailer">Assistir trailer</a>
+            <a class="btn btn-secondary" href="#universo">Explorar o universo</a>
+          </div>
+        </div>
+
+        <aside class="hero-side reveal stagger-4" aria-label="Informações do jogo">
+          <span class="side-label">Visão geral</span>
+
+          <div class="meta-list">
+            <div class="meta-item">
+              <small>Gênero</small>
+              <strong>Terror psicológico / Suspense narrativo</strong>
+            </div>
+
+            <div class="meta-item">
+              <small>Estúdio</small>
+              <strong>Yuaba Studios</strong>
+            </div>
+
+            <div class="meta-item">
+              <small>Atmosfera</small>
+              <strong>Claustrofóbica, íntima e perturbadora</strong>
+            </div>
+
+            <div class="meta-item">
+              <small>Proposta</small>
+              <strong>Descobrir o que foi enterrado no passado da família</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="jogo" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <span class="section-kicker">O jogo</span>
+            <h2>Um retorno que nunca deveria acontecer</h2>
+          </div>
+          <p class="reveal stagger-2">
+            A proposta desta página segue uma direção sóbria, cinematográfica e opressiva, usando
+            exclusivamente os tons solicitados — <strong style="color:#DFDFDF;">#DFDFDF</strong> e
+            <strong style="color:#DFDFDF;">#0E0E0E</strong> como base — para reforçar a tensão, o vazio
+            e o isolamento da narrativa.
+          </p>
+        </div>
+
+        <div class="divider reveal"></div>
+      </div>
+    </section>
+
+    <section id="universo" class="section" style="padding-top: 24px;">
+      <div class="container">
+        <div class="story-grid">
+          <article class="story-block reveal">
+            <div class="story-visual" style="--bg:
+              linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.45)),
+              radial-gradient(circle at 50% 22%, rgba(223,223,223,0.15), transparent 18%),
+              linear-gradient(180deg, #232323 0%, #1b1b1b 24%, #151515 48%, #101010 100%);">
+              <div class="visual-caption">Imagem panorâmica do porão</div>
+            </div>
+
+            <div class="story-copy">
+              <span>Ambiente</span>
+              <h3>O porão observa de volta</h3>
+              <p>
+                Os blocos abaixo foram ajustados para um formato mais retangular e amplo, ideal para
+                imagens grandes. Aqui, a arte pode respirar com mais impacto cinematográfico, valorizando
+                composição horizontal, corredores extensos, escadas, sombras e enquadramentos tensos.
+              </p>
+            </div>
+          </article>
+
+          <article class="story-block reveal">
+            <div class="story-visual" style="--bg:
+              linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.42)),
+              radial-gradient(circle at 48% 24%, rgba(223,223,223,0.12), transparent 16%),
+              linear-gradient(135deg, #212121 0%, #171717 40%, #121212 100%);">
+              <div class="visual-caption">Imagem ampla da protagonista</div>
+            </div>
+
+            <div class="story-copy">
+              <span>Protagonista</span>
+              <h3>Alice entre luto e ruína</h3>
+              <p>
+                Alice não enfrenta apenas um espaço físico. Cada cômodo reabre fragmentos da perda,
+                da culpa e de lembranças que parecem ter sido deformadas pelo tempo. A tensão nasce do
+                conflito entre o que ela recorda e o que a casa insiste em mostrar.
+              </p>
+            </div>
+          </article>
+
+          <article class="story-block reveal">
+            <div class="story-visual" style="--bg:
+              linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.5)),
+              radial-gradient(circle at 50% 18%, rgba(223,223,223,0.12), transparent 14%),
+              linear-gradient(180deg, #252525 0%, #181818 32%, #121212 62%, #0f0f0f 100%);">
+              <div class="visual-caption">Imagem grande do mistério central</div>
+            </div>
+
+            <div class="story-copy">
+              <span>Mistério</span>
+              <h3>Segredos enterrados pedem para emergir</h3>
+              <p>
+                O terror psicológico se constrói por camadas: documentos, símbolos, ruídos, silhuetas e
+                a sensação constante de que algo foi escondido por muito tempo. O porão deixa de ser cenário
+                e se torna uma presença ativa dentro da experiência.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="trailer" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <span class="section-kicker">Trailer</span>
+            <h2>Primeiro vislumbre</h2>
+          </div>
+          <p class="reveal stagger-2">
+            Substitua o link do vídeo abaixo pelo trailer oficial quando estiver pronto. O layout já está
+            preparado para manter um aspecto elegante, amplo e consistente com a direção sombria do projeto.
+          </p>
+        </div>
+
+        <div class="trailer-shell reveal stagger-3">
+          <div class="trailer-frame">
+            <iframe
+              src="https://www.youtube.com/embed/seu_video_aqui"
+              title="Trailer oficial de Alice: Segredos do Porão"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+            <div class="trailer-fallback">
+              Se ainda não houver trailer publicado, troque o código “seu_video_aqui” pelo ID do vídeo no YouTube.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-panel reveal">
+            <span class="section-kicker">Contato</span>
+            <h3>Fale com a Yuaba Studios</h3>
+            <p>
+              Tem dúvidas, quer acompanhar o desenvolvimento ou conversar sobre o projeto?
+              Entre em contato pelo e-mail oficial.
+            </p>
+            <a class="contact-link" href="mailto:contato@yuabastudios.com">
+              contato@yuabastudios.com
+            </a>
+          </div>
+
+          <div class="community-panel reveal stagger-2">
+            <span class="section-kicker">Comunidade</span>
+            <h3>Acompanhe os próximos sinais</h3>
+            <p>
+              Você pode usar os botões abaixo para direcionar o público para suas redes, página da Steam,
+              Discord, Itch.io ou qualquer canal oficial do estúdio.
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="social-link">Instagram</a>
+              <a href="#" class="social-link">Steam</a>
+              <a href="#" class="social-link">Discord</a>
+              <a href="#" class="social-link">YouTube</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Yuaba Studios. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
