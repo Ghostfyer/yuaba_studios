@@ -37,7 +37,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 100px; 
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -181,6 +181,10 @@
       transform: scaleX(1);
     }
 
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
       position: relative;
       min-height: 92vh;
@@ -194,9 +198,19 @@
       position: absolute;
       inset: 0;
       z-index: 0;
+
       background:
-        linear-gradient(180deg, rgba(14,14,14,0.15) 0%, rgba(14,14,14,0.28) 30%, rgba(14,14,14,0.86) 74%, var(--black) 100%),
+        linear-gradient(
+          180deg,
+          rgba(14,14,14,0.15) 0%,
+          rgba(14,14,14,0.28) 30%,
+          rgba(14,14,14,0.86) 74%,
+          var(--black) 100%
+        ),
         var(--hero-img) center 30% / cover no-repeat;
+
+      /* NOVO: imagem principal em preto e branco */
+      filter: grayscale(100%) contrast(1.08);
     }
 
     .hero-bg::before {
@@ -223,8 +237,11 @@
     .hero-inner {
       position: relative;
       z-index: 1;
+
+      /* NOVO: sem a coluna da "Visão geral" */
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr;
+
       gap: 40px;
       align-items: end;
     }
@@ -255,12 +272,13 @@
     }
 
     .hero-copy h1 {
-      font-size: clamp(3rem, 8vw, 3.75rem);
+      /* NOVO: título maior */
+      font-size: clamp(3rem, 8vw, 5rem);
       letter-spacing: 0.03em;
       text-transform: uppercase;
       max-width: 10ch;
       text-wrap: balance;
-      text-shadow: 0 10px 40px rgba(0,0,0,0.45);
+      text-shadow: 0 10px 40px rgba(0,0,0,0.55);
     }
 
     .hero-copy p {
@@ -291,7 +309,12 @@
       text-transform: uppercase;
       font-size: 0.84rem;
       cursor: pointer;
-      transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
     }
 
     .btn-primary {
@@ -316,56 +339,6 @@
       border-color: rgba(255,255,255,0.2);
       background: rgba(255,255,255,0.05);
       box-shadow: 0 10px 25px rgba(0,0,0,0.28);
-    }
-
-    .hero-side {
-      justify-self: end;
-      width: min(100%, 380px);
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .side-label {
-      display: block;
-      margin-bottom: 14px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.72rem;
-    }
-
-    .meta-list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .meta-item {
-      padding: 14px 0;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .meta-item:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .meta-item small {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.72rem;
-      margin-bottom: 6px;
-    }
-
-    .meta-item strong {
-      font-size: 1rem;
-      color: var(--white);
-      font-weight: 800;
     }
 
     .section {
@@ -652,10 +625,6 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-side {
-        justify-self: start;
-      }
-
       .section-head p {
         justify-self: start;
       }
@@ -733,18 +702,19 @@
       }
 
       .contact-panel,
-      .community-panel,
-      .hero-side {
+      .community-panel {
         padding: 22px;
       }
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="container header-inner">
-      <a href="#topo" class="brand" aria-label="Yuaba Studios - Início">
 
+      <a href="#topo" class="brand" aria-label="Yuaba Studios - Início">
         <div class="brand-text">
           <strong>Yuaba Studios</strong>
         </div>
@@ -757,194 +727,381 @@
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
+
     </div>
   </header>
 
   <main id="topo">
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
     <section class="hero">
+
       <div class="hero-bg" aria-hidden="true"></div>
 
       <div class="container hero-inner">
+
         <div class="hero-copy">
 
-          <span class="eyebrow reveal stagger-1">Yuaba Studios apresenta</span>
+          <span class="eyebrow reveal stagger-1">
+            Yuaba Studios apresenta
+          </span>
 
-          <h1 class="reveal stagger-2">Alice: Segredos do Porão</h1>
-          
+          <h1 class="reveal stagger-2">
+            Alice: Segredos do Porão
+          </h1>
+
           <p class="reveal stagger-3">
-            Após a misteriosa morte de seus pais, Alice retorna à sua cidade natal 
-            e acaba ficando presa na antiga casa onde cresceu. 
-            Tente encontrar uma saída enquanto enfrenta seus próprios pesadelos. 
+            Após a misteriosa morte de seus pais, Alice retorna à sua cidade natal
+            e acaba ficando presa na antiga casa onde cresceu.
+            Tente encontrar uma saída enquanto enfrenta seus próprios pesadelos.
           </p>
 
           <div class="hero-actions reveal stagger-4">
-            <a class="btn btn-primary" href="https://www.youtube.com/watch?v=tjOkANUu3cQ" target="_blank" rel="noopener noreferrer">Assistir trailer</a>
-            <a class="btn btn-secondary" href="#jogo">Descobrir o jogo</a>
+
+            <a
+              class="btn btn-primary"
+              href="https://www.youtube.com/watch?v=tjOkANUu3cQ"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Assistir trailer
+            </a>
+
+            <a class="btn btn-secondary" href="#jogo">
+              Descobrir o jogo
+            </a>
+
           </div>
+
         </div>
 
-        <aside class="hero-side reveal stagger-4" aria-label="Informações do jogo">
-          <span class="side-label">Visão geral</span>
-
-          <div class="meta-list">
-            <div class="meta-item">
-              <small>Gênero</small>
-              <strong>Terror psicológico / Suspense narrativo</strong>
-            </div>
-
-            <div class="meta-item">
-              <small>Estúdio</small>
-              <strong>Yuaba Studios©</strong>
-            </div>
-
-            <div class="meta-item">
-              <small>Proposta</small>
-              <strong>Descubra o que foi enterrado no passado da família</strong>
-            </div>
-          </div>
-        </aside>
       </div>
+
     </section>
 
+
+    <!-- =========================
+         O JOGO
+    ========================== -->
+
     <section id="jogo" class="section">
+
       <div class="container">
+
         <div class="section-head">
+
           <div class="reveal">
             <h2>CONHEÇA UM POUCO MAIS!</h2>
           </div>
+
           <p class="reveal stagger-2">
-          "Alice: Segredos do Porão" é um jogo de terror psicológico em primeira pessoa, dividido em capítulos. Você joga como Alice Lorraine, uma jovem de 23 anos que retorna à sua cidade natal após receber a notícia da misteriosa morte de seus pais. 
-          O que deveria ser apenas uma breve visita se transforma em um pesadelo quando Alice se vê presa na antiga casa onde cresceu — um lugar marcado por lembranças distorcidas, pesadelos recorrentes e fragmentos de uma antiga seita esquecida pelo mundo. 
+            "Alice: Segredos do Porão" é um jogo de terror psicológico em primeira pessoa,
+            dividido em capítulos. Você joga como Alice Lorraine, uma jovem de 23 anos que
+            retorna à sua cidade natal após receber a notícia da misteriosa morte de seus pais.
+
+            O que deveria ser apenas uma breve visita se transforma em um pesadelo quando Alice
+            se vê presa na antiga casa onde cresceu — um lugar marcado por lembranças distorcidas,
+            pesadelos recorrentes e fragmentos de uma antiga seita esquecida pelo mundo.
           </p>
+
         </div>
 
         <div class="divider reveal"></div>
+
       </div>
+
     </section>
+
+
+    <!-- =========================
+         UNIVERSO
+    ========================== -->
 
     <section id="universo" class="section" style="padding-top: 24px;">
+
       <div class="container">
+
         <div class="story-grid">
+
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg: url('https://i.ibb.co/KjmCHHNT/alice-casa.png');">
-            </div>
+
+            <div
+              class="story-visual"
+              style="--bg: url('https://i.ibb.co/KjmCHHNT/alice-casa.png');"
+            ></div>
 
             <div class="story-copy">
-              <h3>CAPÍTULO UM: LAR DOCE LAR</h3>
+
+              <h3>
+                CAPÍTULO UM: LAR DOCE LAR
+              </h3>
+
               <p>
-                Neste primeiro capítulo de <I>Alice: Segredos do Porão</I>, explore a antiga casa de seus pais em busca de uma saída, enquanto mergulha cada vez mais no desconhecido. 
+                Neste primeiro capítulo de
+                <I>Alice: Segredos do Porão</I>,
+                explore a antiga casa de seus pais em busca de uma saída,
+                enquanto mergulha cada vez mais no desconhecido.
               </p>
+
             </div>
+
           </article>
 
+
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg: url('https://i.ibb.co/3mxCynvB/alice-cave.png');">
-            </div>
+
+            <div
+              class="story-visual"
+              style="--bg: url('https://i.ibb.co/3mxCynvB/alice-cave.png');"
+            ></div>
 
             <div class="story-copy">
-              <h3>ORGANIZAÇÃO CEIFADORES</h3>
+
+              <h3>
+                ORGANIZAÇÃO CEIFADORES
+              </h3>
+
               <p>
-               Nas profundezas do subsolo, Alice descobre a existência da "Organização Ceifadores", um culto misterioso, isolado, violento e esquecido, que se esconde sob a casa há décadas. Os fanáticos Ceifadores habitam um vasto sistema de túneis, cavernas e corredores escuros que se estendem por quilômetros debaixo da terra, onde poucos ousaram entrar... e nenhum jamais retornou.
+                Nas profundezas do subsolo, Alice descobre a existência da
+                "Organização Ceifadores", um culto misterioso, isolado,
+                violento e esquecido, que se esconde sob a casa há décadas.
+
+                Os fanáticos Ceifadores habitam um vasto sistema de túneis,
+                cavernas e corredores escuros que se estendem por quilômetros
+                debaixo da terra, onde poucos ousaram entrar...
+                e nenhum jamais retornou.
               </p>
+
             </div>
+
           </article>
 
+
           <article class="story-block reveal">
-            <div class="story-visual" style="--bg: url('https://i.ibb.co/Vc5n1Bfy/mergulhe-na-escuridao.png');">
-            </div>
+
+            <div
+              class="story-visual"
+              style="--bg: url('https://i.ibb.co/Vc5n1Bfy/mergulhe-na-escuridao.png');"
+            ></div>
 
             <div class="story-copy">
+
               <span>Criaturas</span>
-              <h3>Segredos enterrados pedem para emergir</h3>
+
+              <h3>
+                Segredos enterrados pedem para emergir
+              </h3>
+
               <p>
-               Eles espreitam por toda parte, esperando seu momento de agir. O desconhecido aguarda ansiosamente sua chegada. 
+                Eles espreitam por toda parte, esperando seu momento de agir.
+                O desconhecido aguarda ansiosamente sua chegada.
               </p>
+
             </div>
+
           </article>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- =========================
+         TRAILER
+    ========================== -->
+
     <section id="trailer" class="section">
+
       <div class="container">
+
         <div class="section-head">
+
           <div class="reveal">
-            <span class="section-kicker">Trailer</span>
-            <h2>Primeiro vislumbre</h2>
+
+            <span class="section-kicker">
+              Trailer
+            </span>
+
+            <h2>
+              Primeiro vislumbre
+            </h2>
+
           </div>
+
           <p class="reveal stagger-2">
             Confira abaixo o trailer oficial de Alice: Segredos do Porão.
           </p>
+
         </div>
+
 
         <div class="trailer-shell reveal stagger-3">
+
           <div class="trailer-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/tjOkANUu3cQ" 
-              title="Alice: Segredos do Porão - Trailer de anúncio" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerpolicy="strict-origin-when-cross-origin" 
+
+            <iframe
+              src="https://www.youtube.com/embed/tjOkANUu3cQ"
+              title="Alice: Segredos do Porão - Trailer de anúncio"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen>
             </iframe>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- =========================
+         CONTATO
+    ========================== -->
+
     <section id="contato" class="section">
+
       <div class="container">
+
         <div class="contact-wrap">
+
           <div class="contact-panel reveal">
-            <span class="section-kicker">Contato</span>
-            <h3>Fale com a Yuaba Studios</h3>
+
+            <span class="section-kicker">
+              Contato
+            </span>
+
+            <h3>
+              Fale com a Yuaba Studios
+            </h3>
+
             <p>
               Tem dúvidas, quer nos apoiar diretamente ou conversar sobre o projeto?
               Entre em contato pelo e-mail oficial.
             </p>
-            <a class="btn btn-primary" style="font-size: 0.75rem; text-transform: lowercase;" href="mailto:yuabastudioscontato@gmail.com">
+
+            <a
+              class="btn btn-primary"
+              style="font-size: 0.75rem; text-transform: lowercase;"
+              href="mailto:yuabastudioscontato@gmail.com"
+            >
               yuabastudioscontato@gmail.com
             </a>
+
           </div>
 
+
           <div class="community-panel reveal stagger-2">
-            <span class="section-kicker">Comunidade</span>
-            <h3>Acompanhe os próximos sinais</h3>
+
+            <span class="section-kicker">
+              Comunidade
+            </span>
+
+            <h3>
+              Acompanhe os próximos sinais
+            </h3>
+
             <p>
-         Acompanhe nossas redes sociais!
-         (página da steam ainda não disponível)
+              Acompanhe nossas redes sociais!
+              (página da steam ainda não disponível)
             </p>
 
             <div class="social-links">
-              <a href="https://www.instagram.com/yuaba_studios/" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
-              <a href="https://x.com/YuabaStudios" target="_blank" rel="noopener noreferrer" class="social-link">Twitter / X</a>
-              <a href="https://discord.com/invite/QPKKm6DtN8" target="_blank" rel="noopener noreferrer" class="social-link">Discord</a>
-              <a href="https://www.youtube.com/@yuabastudios" target="_blank" rel="noopener noreferrer" class="social-link">YouTube</a>
+
+              <a
+                href="https://www.instagram.com/yuaba_studios/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+              >
+                Instagram
+              </a>
+
+              <a
+                href="https://x.com/YuabaStudios"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+              >
+                Twitter / X
+              </a>
+
+              <a
+                href="https://discord.com/invite/QPKKm6DtN8"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+              >
+                Discord
+              </a>
+
+              <a
+                href="https://www.youtube.com/@yuabastudios"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+              >
+                YouTube
+              </a>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
+
   <footer>
+
     <div class="container">
-      <p>© 2026 Yuaba Studios. Todos os direitos reservados.</p>
+
+      <p>
+        © 2026 Yuaba Studios. Todos os direitos reservados.
+      </p>
+
     </div>
+
   </footer>
 
+
   <script>
+
     const observer = new IntersectionObserver((entries) => {
+
       entries.forEach((entry) => {
+
         if (entry.isIntersecting) {
+
           entry.target.classList.add('visible');
+
           observer.unobserve(entry.target);
+
         }
+
       });
+
     }, {
       threshold: 0.14
     });
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    document
+      .querySelectorAll('.reveal')
+      .forEach((el) => observer.observe(el));
+
   </script>
+
 </body>
 </html>
